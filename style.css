@@ -228,12 +228,41 @@ body {
 }
 
 .shadow-block {
-  display: flex;
-  align-items: center;
   height: 70px;
-  padding-inline: 40px;
+  padding-inline: 20px;
   box-shadow: var(--box-shadow);
   border-radius: var(--border-radius);
+}
+
+.custom-checkbox {
+  appearance: none;
+  position: relative;
+  width: 30px;
+  height: 30px;
+  background-color: var(--color-light);
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  transition-duration: var(--transition-duration);
+  cursor: pointer;
+}
+
+.custom-checkbox::after {
+  content: '\2713';
+
+  position: absolute;
+  top: -0.2em;
+  left: 0.2em;
+  width: 0;
+  height: 0;
+  font-size: 26px;
+  overflow: hidden;
+  transition-duration: var(--transition-duration);
+}
+
+.custom-checkbox:checked::after {
+  width: 30px;
+  height: 30px;
+  transition-duration: var(--transition-duration);
 }
 
 .shadow-block--inset {
@@ -247,6 +276,11 @@ body {
 .todo__title {
   margin-bottom: 30px;
   text-align: center;
+}
+
+.create-task {
+  display: flex;
+  align-items: center;
 }
 
 .create-task__form {
@@ -309,19 +343,19 @@ body {
   rotate: 90deg;
 }
 
-.task__form {
-  margin-top: 5px;
-  width: fit-content;
-  display: flex;
-  justify-content: center;
+.task {
+  display: flex; 
   align-items: center;
+  column-gap: 20px;
+  cursor: pointer;
 }
 
-.checkbox {
-  
+.task__label {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  height: 100%;
 }
-
-
 
 @media (hover: hover) {
   .todo__item:hover {
