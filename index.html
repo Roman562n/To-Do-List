@@ -16,42 +16,17 @@
         <div class="todo__create-task create-task shadow-block shadow-block--inset">
           <form action="" class="create-task__form">
             <input class="create-task__input" type="text" required placeholder="Что бы вы хотели сделать?" autofocus>
-            <button class="create-task__button" type="submit" aria-label="Добавить задачу" title="Добавить задачу"></button>
+            <button class="create-task__button" type="submit" aria-label="Добавить задачу" title="Добавить задачу" data-js-task-create-button=""></button>
           </form>
         </div>
       </header>
       <div class="todo__body">
-        <ul class="todo__list">
-          <li class="todo__item">
-            <div class="todo__task task shadow-block">
-              <form action="" class="task__form">
-                <label class="task__label">
-                  <input class="task__checkbox checkbox" type="checkbox">
-                  <span>Some task</span>
-                </label>
-              </form>
-            </div>
-          </li>
+        <ul class="todo__list" data-js-todo-list="">
 
-          <li class="todo__item">
+          <li class="todo__item" data-js-task-item>
             <div class="todo__task task shadow-block">
-              <form action="" class="task__form">
-                <label class="task__label">
-                  <input class="task__checkbox" type="checkbox">
-                  Some task
-                </label>
-              </form>
-            </div>
-          </li>
-
-          <li class="todo__item">
-            <div class="todo__task task shadow-block">
-              <form action="" class="task__form">
-                <label class="task__label">
-                  <input class="task__checkbox" type="checkbox">
-                  Some task
-                </label>
-              </form>
+              <input class="task__checkbox custom-checkbox" id="checkbox" type="checkbox">
+              <label class="task__label" for="checkbox">Some task</label>
             </div>
           </li>
         </ul>
