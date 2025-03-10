@@ -281,8 +281,8 @@ body {
 
 .create-task__button {
   position: relative;
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: white;
   box-shadow: var(--box-shadow);
@@ -309,43 +309,18 @@ body {
   rotate: 90deg;
 }
 
+.task__form {
+  margin-top: 5px;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .checkbox {
-  appearance: none;
-  width: 30px;
-  height: 30px;
-  background-color: var(--color-light);
-  box-shadow: inset 0 0 5px rgb(0 0 0 / 0.2);
-  border-radius: 10px;
-  border: 1px solid #FFFFFF;
-  transition: 500ms;
+  
 }
 
-.checkbox::after {
-  content: "\2714";
-  position: absolute;
-  top: -5px;
-  left: 2px;
-  width: 0px;
-  height: 0px;
-  font-size: 26px;
-  transition: 500ms;
-  overflow: hidden;
-}
-
-.checkbox-input:checked::after {
-  width: 30px;
-  height: 30px;
-  transition: 500ms;
-}
-
-.checkbox-input:disabled {
-  background: #ccc;
-  border-color: #ccc;
-}
-
-.checkbox-input:disabled::after {
-  filter: grayscale(100%);
-}
 
 
 @media (hover: hover) {
