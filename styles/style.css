@@ -5,8 +5,8 @@
   --color-light: #ffffff;
   --color-dark: #000000;
 
-  --box-shadow: 3px 5px 10px 0px #787878;
-  --box-shadow-inset: inset -3px -4px 8px 0px #787878;
+  --box-shadow: 3px 3px 10px 0px #787878;
+  --box-shadow-inset: inset -2px -2px 8px 0px #787878;
   --border: 3px solid var(--color-dark);
   --border-radius: 15px;
 
@@ -15,6 +15,12 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-light);
+  color: var(--color-dark);
+}
+
+h1 {
+  font-size: 2rem;
 }
 
 .container {
@@ -30,11 +36,15 @@ body {
   border-radius: var(--border-radius);
 }
 
+.shadow-block--inset {
+  box-shadow: var(--box-shadow-inset);
+}
+
 .button {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: white;
+  background-color: var(--color-light);
   box-shadow: var(--box-shadow);
   border: none;
   transition-duration: var(--transition-duration);
@@ -53,8 +63,9 @@ body {
 }
 
 .custom-checkbox::after {
-  content: '\2713';
+  content: '\2714';
 
+  color: var(--color-dark);
   position: absolute;
   top: -0.2em;
   left: 0.2em;
@@ -69,10 +80,6 @@ body {
   width: 30px;
   height: 30px;
   transition-duration: var(--transition-duration);
-}
-
-.shadow-block--inset {
-  box-shadow: var(--box-shadow-inset);
 }
 
 .todo__header {
@@ -90,7 +97,7 @@ body {
 }
 
 .create-task__form {
-  width: 100%;
+  flex-grow: 1;
   display: flex;
   align-items: center;
   column-gap: 40px;
@@ -102,39 +109,16 @@ body {
   background-color: var(--color-light);
   outline: none;
   border: 3px solid transparent;
+  color: var(--color-dark);
 }
 
 .create-task__input:focus-visible {
   border-bottom: var(--border);
 }
 
-.todo__list {
-  display: flex;
-  flex-direction: column;
-  row-gap: 15px;
-}
-
-.todo__item {
-  scale: 1;
-  transition-duration: var(--transition-duration);
-  animation-name: task-appearance;
-  animation-duration: var(--transition-duration); 
-}
-
-@keyframes task-appearance {
-  0% {
-    opacity: 0;
-    translate: 0 -100%;
-  }
-
-  100% {
-    opacity: 1;
-    translate: 0 0%;
-  }
-}
-
 .create-task__button {
   position: relative;
+  flex-shrink: 0;
 }
 
 .create-task__button::before,
@@ -156,24 +140,41 @@ body {
   rotate: 90deg;
 }
 
+.todo__list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.todo__item {
+  scale: 1;
+  transition-duration: var(--transition-duration);
+  animation-name: task-appearance;
+  animation-duration: var(--transition-duration); 
+}
+
 .task {
   display: flex;
   align-items: center;
   column-gap: 20px;
 }
 
-.task__label {
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-  height: 100%;
+.task.checked {
+  box-shadow: var(--box-shadow-inset);
+  order: 10;
+  text-decoration: line-through;
+}
+
+.task__checkbox {
+  flex-shrink: 0;
 }
 
 .task__content {
-  margin-left: 20px;
+  flex-grow: 1;
 }
 
 .task__delete-button {
+  flex-shrink: 0;
   position: relative;
 }
 
@@ -190,6 +191,18 @@ body {
   border-radius: 2px;
 }
 
+@keyframes task-appearance {
+  0% {
+    opacity: 0;
+    translate: 0 -100%;
+  }
+
+  100% {
+    opacity: 1;
+    translate: 0 0%;
+  }
+}
+
 @media (hover: hover) {
 
   .button:hover {
@@ -198,7 +211,7 @@ body {
 
     &::before,
     &::after {
-      background-color: white;
+      background-color: var(--color-light);
     }
   }
 
@@ -215,7 +228,7 @@ body {
 
     &::before,
     &::after {
-      background-color: white;
+      background-color: var(--color-light);
     }
   }
 
