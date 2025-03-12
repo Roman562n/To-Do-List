@@ -2,11 +2,18 @@ const createTaskInputElement = document.querySelector('[data-js-create-task-inpu
 const createTaskButtonElement = document.querySelector('[data-js-create-task-button]')
 const todoListElement = document.querySelector('[data-js-todo-list]')
 
-localStorage.setItem('tasks', '[{"content": "Some task", "isChecked": true}]')
+// let testTasks = []
 
-let dataAttCount = 0
+// for (let i = 0; i < 100; i++) {
+//   const task = {}
+//   task.content = i
+//   task.isChecked = false
+//   testTasks.push(task)
+// }
+
+// localStorage.setItem('tasks', JSON.stringify(testTasks))
+
 let tasks
-
 !localStorage.tasks ? tasks = [] : tasks = JSON.parse(localStorage.getItem('tasks') )
 
 for (let task of tasks) {
@@ -15,22 +22,19 @@ for (let task of tasks) {
 
 function addTodoItem(taskMessage, isChecked = false) {
   const newTaskMarkup = `
-        <li class="todo__item task shadow-block ${isChecked ? 'checked': ''}" data-js-todo-item="${dataAttCount}">
+        <li class="todo__item task shadow-block ${isChecked ? 'checked': ''}" data-js-todo-item>
         <input class="task__checkbox custom-checkbox" type="checkbox" data-js-task-checkbox ${isChecked ? 'checked': ''}>
         <span class="task__content" data-js-todo-content>${taskMessage}</span>
         <button class="task__delete-button button" type="button" aria-label="Delete task" title="Delete task" data-js-task-delete-button></button>
     </li>`
 
   todoListElement.insertAdjacentHTML("afterbegin", newTaskMarkup)    
-  updateStorage(dataAttCount, taskMessage, isChecked)
-  dataAttCount++
 }
 
 function createTaskEvent() {
-  console.log(createTaskInputElement.value)
   const taskMessage = createTaskInputElement.value
 
-  if(taskMessage === '') {
+  if(!taskMessage) {
     return
   }
 
@@ -39,6 +43,7 @@ function createTaskEvent() {
   updateStorage()
 }
 
+// События создания новой задачи
 createTaskButtonElement.addEventListener('click', createTaskEvent)
 createTaskInputElement.addEventListener('keydown', (event) => {
   if (event.code === "Enter" || event.code === 'NumpadEnter') {
@@ -47,17 +52,16 @@ createTaskInputElement.addEventListener('keydown', (event) => {
   }
 })
 
+// События удаления и выполнения задачи
 todoListElement.addEventListener('click', (event) => {
   const todoItemElement = event.target.closest('[data-js-todo-item]')
   const deleteButtonElement = event.target.closest('[data-js-task-delete-button]')
-
+  
   if (deleteButtonElement) {
-    console.log(todoItemElement)
     todoItemElement.remove()
   }
   else if (todoItemElement) {
     todoItemElement.querySelector('[data-js-task-checkbox]').checked = false
-    console.log(event.target)
     todoItemElement.classList.toggle('checked')
 
     if (todoItemElement.classList.contains('checked')) {
@@ -65,72 +69,19 @@ todoListElement.addEventListener('click', (event) => {
     }
     
   }
+  updateStorage()
 })
 
-function updateStorage(index, message, isChecked = false) {
-  const task = {}
-
-  task.content = message
-  task.isChecked = isChecked
-
-  tasks[index] = task
-  console.log(tasks)
+function updateStorage() {
+  tasks = []
+  for (let i = 0; i < todoListElement.childElementCount; i++) {
+    const task = {}
+    task.content = todoListElement.children[i].querySelector('[data-js-todo-content]').textContent
+    task.isChecked = todoListElement.children[i].classList.contains('checked')
+    tasks.push(task)
+  }
+  localStorage.setItem('tasks', JSON.stringify(tasks))
 }
-
-
-
-
-// function removeTask(element) {
-//   element.remove()
-// }
-
-// todoListElement.addEventListener('click', (event) => {
-//   const todoItemElement = event.target.closest('[data-js-todo-item]')
-//   const deleteButtonElement = event.target.closest('[data-js-task-delete-button]')
-
-//   if (deleteButtonElement) {
-//     removeTask(todoItemElement)
-//   }
-//   else if (todoItemElement) {
-//     todoItemElement.querySelector('[data-js-task-checkbox]').checked = false
-//     console.log(event.target)
-//     todoItemElement.classList.toggle('checked')
-
-//     if (todoItemElement.classList.contains('checked')) {
-//       todoItemElement.querySelector('[data-js-task-checkbox]').checked = true
-//     }
-    
-//   }
-// })
-
-// const taskCheckboxElements = todoListElement.querySelectorAll('[data-js-task-checkbox]')
-
-// function addTodoItem() {
-//   const taskMessage = createTaskInputElement.value
-//   if (taskMessage === '') {
-//     return
-//   }
-
-//   const newTaskMarkup = `
-//     <li class="todo__item task shadow-block" data-js-todo-item>
-//       <input class="task__checkbox custom-checkbox" type="checkbox" data-js-task-checkbox>
-//       <span class="task__content">${taskMessage}</span>
-//       <button class="task__delete-button button" type="button" aria-label="Delete task" title="Delete task" data-js-task-delete-button></button>
-//     </li>`
-
-//   todoListElement.insertAdjacentHTML("afterbegin", newTaskMarkup)
-//   createTaskInputElement.value = ''
-// }
-
-// createTaskButtonElement.addEventListener('click', addTodoItem)
-
-// createTaskInputElement.addEventListener('keydown', (event) => {
-//   if (event.code === "Enter") {
-//     event.preventDefault()
-//     addTodoItem()
-//   }
-// })
-
 
 
 

@@ -140,6 +140,10 @@ h1 {
   rotate: 90deg;
 }
 
+.todo__body {
+  padding-bottom: 40px;
+}
+
 .todo__list {
   display: flex;
   flex-direction: column;
