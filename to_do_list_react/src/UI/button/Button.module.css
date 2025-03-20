@@ -1,0 +1,71 @@
+.button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--color-light);
+    box-shadow: var(--box-shadow);
+    border: none;
+    transition-duration: var(--transition-duration);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.button.add::before,
+.button.add::after {
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 3px;
+    height: 25px;
+    background-color: var(--color-dark);
+    border-radius: 2px;
+    transition-duration: var(--transition-duration);
+}
+
+.button .add::after {
+    rotate: 90deg;
+  }
+
+.button.delete::before {
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-dark);
+    border-radius: 2px;
+}
+
+
+@media (hover: hover) {
+
+    .button:hover {
+      background-color: var(--color-dark);
+      color: var(--color-light);
+  
+      &::before,
+      &::after {
+        background-color: var(--color-light);
+      }
+    }
+  
+  }
+  
+  @media (hover: none) {
+  
+    .button:active {
+      background-color: var(--color-dark);
+      color: var(--color-light);
+  
+      &::before,
+      &::after {
+        background-color: var(--color-light);
+      }
+    }
+  }

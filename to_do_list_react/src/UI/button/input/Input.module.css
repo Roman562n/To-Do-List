@@ -1,0 +1,12 @@
+.input {
+    flex-grow: 1;
+    border: none;
+    background-color: var(--color-light);
+    outline: none;
+    border: 3px solid transparent;
+    color: var(--color-dark);
+}
+
+.input:focus-visible {
+    border-bottom: var(--border);
+  }
